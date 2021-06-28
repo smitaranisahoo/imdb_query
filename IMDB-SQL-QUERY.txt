@@ -1,0 +1,250 @@
+
+Microsoft Windows [Version 10.0.18363.1621]
+(c) 2019 Microsoft Corporation. All rights reserved.
+
+mysql> create database IMDB;
+Query OK, 1 row affected (0.37 sec)
+
+mysql> use IMDB;
+Database changed
+mysql> CREATE TABLE Movie_Media (
+    ->     ID int,
+    ->     MID int,
+    ->     MediaID int,
+    ->     MediaName varchar(255),
+    ->     Mtitle  varchar(255),
+    ->     MediaURL varchar(255),
+    ->     Mlanguage varchar(255)
+    -> );
+Query OK, 0 rows affected (3.07 sec)
+
+mysql> CREATE TABLE Movie_Genre (
+    ->     ID int,
+    ->     MID int,
+    ->     GID int,
+    ->     Mtitle  varchar(255),
+    ->     Gtype varchar(255),
+    ->     Mlanguage varchar(255)
+    -> );
+Query OK, 0 rows affected (1.76 sec)-
+
+mysql> CREATE TABLE Movie_Review (
+    ->     ID int,
+    ->     MID int,
+    ->     RID int,
+    ->     UserId int,
+    ->     Mtitle  varchar(255),
+    ->     User_Name varchar(255),
+    ->     Review_type varchar(255)
+    ->
+    -> );
+Query OK, 0 rows affected (1.13 sec)
+
+ 
+mysql> CREATE TABLE Artist_Skill (
+    ->     ID int,
+    ->     ArtistID int,
+    ->     SID int,
+    ->     Skill_Name varchar(255),
+    ->     Artist_Name  varchar(255)
+    -> );
+Query OK, 0 rows affected (0.74 sec)
+
+mysql>
+mysql> CREATE TABLE Artist_Role (
+    ->     ID int,
+    ->     ArtistID int,
+    ->     Role_ID int,
+    ->     MID int,
+    ->     Role_Name varchar(255),
+    ->     Skill_Name varchar(255),
+    ->     Artist_Name  varchar(255),
+    ->     Mtitle varchar(255)
+    -> );
+Query OK, 0 rows affected (1.17 sec)
+
+mysql> INSERT INTO Movie_Media (ID,  MID, MediaID, Mtitle,MediaName,MediaURL,Mlanguage )
+    -> VALUES (1,tt0001,1,"Der Golem","UFO_Movies","https://www.ufomoviez.com/");
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> INSERT INTO Movie_Media (ID,  MID, MediaID, Mtitle,MediaName,MediaURL,Mlanguage )
+    -> VALUES ("1","tt0001","1","Der Golem","UFO_Movies","https://www.ufomoviez.com/");
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> INSERT INTO Movie_Media (ID,  MID, MediaID, Mtitle,MediaName,MediaURL,Mlanguage )
+    -> VALUES ("1","tt0001","1","Der Golem","UFO_Movies","https://www.ufomoviez.com/","German");
+ERROR 1366 (HY000): Incorrect integer value: 'tt0001' for column 'MID' at row 1
+mysql>
+mysql> INSERT INTO Movie_Media (ID,  MID, MediaID, Mtitle,MediaName,MediaURL,Mlanguage )
+    -> VALUES ("1","1","1","Der Golem","UFO_Movies","https://www.ufomoviez.com/","German");
+Query OK, 1 row affected (0.22 sec)
+
+mysql>
+mysql> INSERT INTO Movie_Media (ID,  MID, MediaID, Mtitle,MediaName,MediaURL,Mlanguage )
+    -> VALUES ("1","2","3","^C"UFO_Movies","https://www.ufomoviez.com/","German");
+mysql> INSERT INTO Movie_Media (ID,  MID, MediaID, Mtitle,MediaName,MediaURL,Mlanguage )
+    -> VALUES ("1","2","3","Housefull4","ZEE Media","http://zeemedia.in/","Hindi");
+Query OK, 1 row affected (0.14 sec)
+
+mysql> INSERT INTO Movie_Media (ID,  MID, MediaID, Mtitle,MediaName,MediaURL,Mlanguage )
+    -> VALUES ("2","3","4","HUM SATH ATH HAI","PVR","https://www.team-mediaportal.com/","ENGLISH");
+Query OK, 1 row affected (0.14 sec)
+
+mysql> INSERT INTO Movie_Media (ID,  MID, MediaID, Mtitle,MediaName,MediaURL,Mlanguage )
+    -> VALUES ("3","3","5","3 iDIOTS","Aaj Tak","https://www.aajtak.in/","Telugu");
+Query OK, 1 row affected (0.10 sec)
+
+mysql> INSERT INTO Movie_Media (ID,  MID, MediaID, Mtitle,MediaName,MediaURL,Mlanguage )
+    -> VALUES ("4","2","5","Golamal 3","Aaj Tak","https://www.aajtak.in/","English");
+Query OK, 1 row affected (0.06 sec)
+
+mysql>
+mysql> INSERT INTO Movie_Media (ID,  MID, MediaID, Mtitle,MediaName,MediaURL,Mlanguage )
+    -> VALUES ("5","2","5","Tare jamin Par","PVR","https://www.team-mediaportal.com/","Hindi");
+Query OK, 1 row affected (0.13 sec)
+
+mysql> INSERT INTO Movie_Media (ID,  MID, MediaID, Mtitle,MediaName,MediaURL,Mlanguage )
+    -> VALUES ("6","2","5","Tare jamin Par","ZEE Media","http://zeemedia.in/","Hindi");
+Query OK, 1 row affected (0.08 sec)
+
+mysql>
+mysql> INSERT INTO Movie_Media (ID,  MID, MediaID, Mtitle,MediaName,MediaURL,Mlanguage )
+    -> VALUES ("7","2","5","Tare jamin Par","NDTV","https://www.ndtv.com/","Hindi");
+Query OK, 1 row affected (0.11 sec)
+
+mysql> select * from  Movie_Media;
++------+------+---------+------------+------------------+-----------------------------------+-----------+
+| ID   | MID  | MediaID | MediaName  | Mtitle           | MediaURL                          | Mlanguage |
++------+------+---------+------------+------------------+-----------------------------------+-----------+
+|    1 |    1 |       1 | UFO_Movies | Der Golem        | https://www.ufomoviez.com/        | German    |
+|    2 |    2 |       3 | ZEE Media  | Housefull4       | http://zeemedia.in/               | Hindi     |
+|    3 |    3 |       4 | PVR        | HUM SATH ATH HAI | https://www.team-mediaportal.com/ | ENGLISH   |
+|    4 |    3 |       5 | Aaj Tak    | 3 iDIOTS         | https://www.aajtak.in/            | Telugu    |
+|    5 |    2 |       5 | Aaj Tak    | Golamal 3        | https://www.aajtak.in/            | English   |
+|    6 |    2 |       5 | PVR        | Tare jamin Par   | https://www.team-mediaportal.com/ | Hindi     |
+|    7 |    2 |       5 | ZEE Media  | Tare jamin Par   | http://zeemedia.in/               | Hindi     |
+|    8 |    2 |       5 | NDTV       | Tare jamin Par   | https://www.ndtv.com/             | Hindi     |
++------+------+---------+------------+------------------+-----------------------------------+-----------+
+8 rows in set (0.10 sec)
+
+mysql> ^C
+mysql> INSERT INTO Movie_Genre (ID,  GID, Mtitle,Gtype,Mlanguage )
+    ->     VALUES ("1","6",3 IDIOTS,"Comedy","Telugu ");
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'IDIOTS,"Comedy","Telugu ")' at line 2
+mysql> INSERT INTO Movie_Genre (ID,  GID, Mtitle,Gtype,Mlanguage )
+    ->     VALUES ("1","6",IDIOTS,"Comedy","Telugu ");
+ERROR 1054 (42S22): Unknown column 'IDIOTS' in 'field list'
+mysql> INSERT INTO Movie_Genre (ID,  GID, Mtitle,Gtype,Mlanguage )
+    ->     VALUES ("1","3","6","3IDIOTS","Comedy","Telugu ");
+Query OK, 1 row affected (0.19 sec)
+
+mysql>
+mysql> INSERT INTO Movie_Genre (ID,  GID, Mtitle,Gtype,Mlanguage )
+    ->     VALUES ("2","2","3","6"," Housefull4 ","Comedy","Hindi ");
+Query OK, 1 row affected (0.17 sec)
+
+mysql> INSERT INTO Movie_Genre (ID,  GID, Mtitle,Gtype,Mlanguage )
+    ->     VALUES ("3","4","2","5"," Golamal 3 ","Action","Hindi ");
+Query OK, 1 row affected (0.17 sec)
+
+mysql> INSERT INTO Movie_Genre (ID,  GID, Mtitle,Gtype,Mlanguage )
+    ->     VALUES ("4","5","3","HUM SATH ATH HAI","Drama","English ");
+Query OK, 1 row affected (0.17 sec)
+
+mysql> SELECT * FROM Movie_Genre;
++------+------+------+------------------+--------+-----------+
+| ID   | MID  | GID  | Mtitle           | Gtype  | Mlanguage |
++------+------+------+------------------+--------+-----------+
+|    1 | 3    |    6 | 3IDIOTS          | Comedy | Telugu    |
+|    2 | 2    |    6 |  Housefull4      | Comedy | Hindi     |
+|    3 | 4    |    5 |  Golamal 3       | Action | Hindi     |
+|    4 | 5    |    3 | HUM SATH ATH HAI | Drama  | English   |
++------+------+------+------------------+--------+-----------+
+4 rows in set (0.10 sec)
+
+mysql> INSERT INTO Artist_Skill (ID,ArtistID,SID, Skill_Name,Artist_Name )
+    ->        VALUES ("1","3","1","Dancing","Mini Dovia ");
+Query OK, 1 row affected (0.22 sec)
+
+mysql>
+mysql> INSERT INTO Artist_Skill (ID,ArtistID,SID, Skill_Name,Artist_Name )
+    ->        VALUES ("2","4","3","Fluency","Violet MacMillian ");
+Query OK, 1 row affected (0.10 sec)
+
+mysql> INSERT INTO Artist_Skill (ID,ArtistID,SID, Skill_Name,Artist_Name )
+    ->        VALUES ("3","4","5","Good Looking","Violet MacMillian ");
+Query OK, 1 row affected (0.06 sec)
+
+mysql> SELECT * FROM Artist_Skill;
++------+----------+------+--------------+--------------------+
+| ID   | ArtistID | SID  | Skill_Name   | Artist_Name        |
++------+----------+------+--------------+--------------------+
+|    1 |        3 |    1 | Dancing      | Mini Dovia         |
+|    2 |        4 |    3 | Fluency      | Violet MacMillian  |
+|    3 |        4 |    5 | Good Looking | Violet MacMillian  |
++------+----------+------+--------------+--------------------+
+3 rows in set (0.01 sec)
+mysql>  INSERT INTO Movie_Review (ID,MID,RID,UserId,Mtitle,User_Name,Review_type )
+    ->        VALUES ("1","3","3","7","Der Golem ","Susanta","Good ");
+Query OK, 1 row affected (0.80 sec)
+
+mysql> INSERT INTO Movie_Review (ID,MID,RID,UserId,Mtitle,User_Name,Review_type )
+    ->        VALUES ("2","2","4","1","Golmal3","Snigdha","Average ");
+Query OK, 1 row affected (0.10 sec)
+
+mysql> INSERT INTO Movie_Review (ID,MID,RID,UserId,Mtitle,User_Name,Review_type )
+    ->       VALUES ("3","4","4","2","Tare Jamin Par","Smiki","Average ");
+Query OK, 1 row affected (0.18 sec)
+
+mysql> INSERT INTO Movie_Review (ID,MID,RID,UserId,Mtitle,User_Name,Review_type )
+    ->     ->        VALUES ("4","4","1","3","Tare Jamin Par","Siddhi","Excellent ");
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '->        VALUES ("4","4","1","3","Tare Jamin Par","Siddhi","Excellent ")' at line 2
+mysql>
+mysql> INSERT INTO Movie_Review (ID,MID,RID,UserId,Mtitle,User_Name,Review_type )
+    ->   VALUES ("4","4","1","3","Tare Jamin Par","Siddhi","Excellent ");
+Query OK, 1 row affected (0.17 sec)
+
+mysql> SELECT * FROM Movie_Review;
++------+------+------+--------+----------------+-----------+-------------+
+| ID   | MID  | RID  | UserId | Mtitle         | User_Name | Review_type |
++------+------+------+--------+----------------+-----------+-------------+
+|    1 |    1 |    3 |      7 | Der Golem      | Susanta   | Good        |
+|    2 |    2 |    4 |      1 | Golmal3        | Snigdha   | Average     |
+|    3 |    4 |    4 |      2 | Tare Jamin Par | Smiki     | Average     |
+|    4 |    4 |    1 |      3 | Tare Jamin Par | Siddhi    | Excellent   |
++------+------+------+--------+----------------+-----------+-------------+
+4 rows in set (0.00 sec)
+
+
+
+  INSERT INTO Artist_Role (ID,ArtistID,MID,Role_Name,Skill_Name,Artist_Name,Mtitle )
+    ->     VALUES ("1","3","1","Hero","Dancing","","Excellent","Mini Dovia","Der Golem  ");
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql>  INSERT INTO Artist_Role (ID,ArtistID,MID,Role_Name,Skill_Name,Artist_Name,Mtitle )
+    ->     VALUES ("1","3","1","Hero","Dancing","Mini Dovia","Der Golem  ");
+Query OK, 1 row affected (0.24 sec)
+
+mysql>
+mysql> INSERT INTO Artist_Role (ID,ArtistID,MID,Role_Name,Skill_Name,Artist_Name,Mtitle )
+    ->     VALUES ("2","7","4","Heroine","Fluency","Hans Sturm"," Tare Jamin Par");
+Query OK, 1 row affected (0.08 sec)
+
+mysql> INSERT INTO Artist_Role (ID,ArtistID,MID,Role_Name,Skill_Name,Artist_Name,Mtitle )
+    ->     VALUES ("3","1","2","Heroine","Fluency","Lyda Salmonova"," Golmal3");
+Query OK, 1 row affected (0.16 sec)
+
+mysql>
+mysql> INSERT INTO Artist_Role (ID,ArtistID,MID,Role_Name,Skill_Name,Artist_Name,Mtitle )
+    ->     VALUES ("4","6","2","villian","Good Looking","Elem Harris"," Golmal3");
+Query OK, 1 row affected (0.12 sec)
+
+mysql> SELECT * FROM Artist_Role;
++------+----------+---------+------+-----------+--------------+----------------+-----------------+
+| ID   | ArtistID | Role_ID | MID  | Role_Name | Skill_Name   | Artist_Name    | Mtitle          |
++------+----------+---------+------+-----------+--------------+----------------+-----------------+
+|    1 |        3 |    NULL |    1 | Hero      | Dancing      | Mini Dovia     | Der Golem       |
+|    2 |        7 |    NULL |    4 | Heroine   | Fluency      | Hans Sturm     |  Tare Jamin Par |
+|    3 |        1 |    NULL |    2 | Heroine   | Fluency      | Lyda Salmonova |  Golmal3        |
+|    4 |        6 |    NULL |    2 | villian   | Good Looking | Elem Harris    |  Golmal3        |
++------+----------+---------+------+-----------+--------------+----------------+-----------------+
+4 rows in set (0.00 sec)
+
+
